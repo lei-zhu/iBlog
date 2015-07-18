@@ -50,8 +50,8 @@ namespace iBlog
         {
             App.Instance.RegisterModule<DependencyModule>();
 
-            App.Instance.ContainerBuilder.RegisterControllers(typeof(MvcApplication).Assembly);
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(App.Instance.Build()));
+            ////App.Instance.ContainerBuilder.RegisterControllers(typeof(MvcApplication).Assembly);
+            ////DependencyResolver.SetResolver(new AutofacDependencyResolver(App.Instance.Build()));
         }
 
         #endregion

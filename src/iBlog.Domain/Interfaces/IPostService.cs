@@ -68,12 +68,12 @@ namespace iBlog.Domain.Interfaces
         List<PostEntity> GetAllPostsOrPages(bool includeAll);
 
         /// <summary>
-        /// The get pages.
+        /// The get all pages.
         /// </summary>
         /// <returns>
         /// The <see cref="List{PostEntity}"/>.
         /// </returns>
-        List<PostEntity> GetPages();
+        List<PostEntity> GetAllPages();
 
         /// <summary>
         /// The get pages.
@@ -84,7 +84,7 @@ namespace iBlog.Domain.Interfaces
         /// <returns>
         /// The <see cref="List{PostEntity}"/>.
         /// </returns>
-        List<PostEntity> GetPages(int userID);
+        List<PostEntity> GetAllPages(int userID);
 
         /// <summary>
         /// The get post by id.

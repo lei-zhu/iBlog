@@ -68,20 +68,11 @@ namespace iBlog.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
-        /// <param name="cache">
-        /// The cache.
-        /// </param>
-        /// <param name="post">
-        /// The post.
-        /// </param>
-        /// <param name="setting">
-        /// The setting.
-        /// </param>
-        public BlogController(ICacheService cache, IPostService post, ISettingService setting)
+        public BlogController()
         {
-            this.cacheService = cache;
-            this.postService = post;
-            this.settingService = setting;
+            this.cacheService = ServiceLocator.Instance.GetService<ICacheService>();
+            this.postService = ServiceLocator.Instance.GetService<IPostService>();
+            this.settingService = ServiceLocator.Instance.GetService<ISettingService>();
         }
 
         #endregion
@@ -97,7 +88,7 @@ namespace iBlog.Controllers
         [HttpGet]
         public ActionResult Footer()
         {
-            return this.PartialView(this.settingService.BlogName);
+            return this.PartialView("Footer", this.settingService.BlogName);
         }
 
         /// <summary>

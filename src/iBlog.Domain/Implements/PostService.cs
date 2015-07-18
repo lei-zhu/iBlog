@@ -193,12 +193,12 @@ namespace iBlog.Domain.Implements
         }
 
         /// <summary>
-        /// The get pages.
+        /// The get all pages.
         /// </summary>
         /// <returns>
         /// The <see cref="List{PostEntity}"/>.
         /// </returns>
-        public List<PostEntity> GetPages()
+        public List<PostEntity> GetAllPages()
         {
             List<PostEntity> postEntities = this.postTable.Where(p => !p.IsPrivate && p.EntryType == 2).ToList();
             return this.GetPostRelevantData(postEntities);
@@ -213,7 +213,7 @@ namespace iBlog.Domain.Implements
         /// <returns>
         /// The <see cref="List{PostEntity}"/>.
         /// </returns>
-        public List<PostEntity> GetPages(int userID)
+        public List<PostEntity> GetAllPages(int userID)
         {
             List<PostEntity> postEntities =
                 this.postTable.Where(
@@ -429,7 +429,7 @@ namespace iBlog.Domain.Implements
                 post.Content = postEntity.Content;
                 post.Url = postEntity.Url;
                 post.LastModifiedTime = postEntity.LastModifiedTime;
-                post.UserCanAddComments = postEntity.UserCanAddComments;
+                post.CanAddComments = postEntity.CanAddComments;
                 post.CanBeShared = postEntity.CanBeShared;
                 post.IsPrivate = postEntity.IsPrivate;
                 post.EntryType = postEntity.EntryType;

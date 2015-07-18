@@ -13,6 +13,7 @@ namespace iBlog.Application
 
     using iBlog.Domain.Implements;
     using iBlog.Domain.Interfaces;
+    using iBlog.Service;
 
     /// <summary>
     /// The dependency module.
@@ -29,6 +30,8 @@ namespace iBlog.Application
         /// </param>
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<CacheService>().As<ICacheService>().SingleInstance();
+
             builder.RegisterType<UserService>().As<IUserService>().SingleInstance();
             builder.RegisterType<RoleService>().As<IRoleService>().SingleInstance();
 

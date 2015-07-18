@@ -10,6 +10,13 @@
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title</title>
         @Html.LoadThemeStyles(Html.Action("GetTheme", "Blog").ToString())
+        <style type="text/css">
+            #footer {
+                text-align: center;
+                color: #BDBDBD;
+                font-size: x-small;
+            }
+        </style>
         <script type="text/javascript" src="@Url.Content("~/JQuery/jquery-1.11.3.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Bootstrap/js/bootstrap.min.js")"></script>
     </head>

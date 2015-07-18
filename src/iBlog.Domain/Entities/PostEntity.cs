@@ -88,7 +88,7 @@ namespace iBlog.Domain.Entities
         /// </summary>
         [Column]
         [DisplayName("允许评论文章？")]
-        public bool UserCanAddComments { get; set; }
+        public bool CanAddComments { get; set; }
 
         /// <summary>
         /// Gets or sets the user id.
