@@ -11,7 +11,7 @@ namespace iBlog.Application
 {
     using System.Configuration;
 
-    using iBlog.Config;
+    using iBlog.Configuration;
 
     /// <summary>
     /// The app config.

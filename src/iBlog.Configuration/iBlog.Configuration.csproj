@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8650FA31-0A9A-4734-AD07-4E81BCCF5D09}</ProjectGuid>
+    <ProjectGuid>{F5C386D3-EDED-434D-B0BE-67636F1429D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iBlog.Domain</RootNamespace>
-    <AssemblyName>iBlog.Domain</AssemblyName>
+    <RootNamespace>iBlog.Configuration</RootNamespace>
+    <AssemblyName>iBlog.Configuration</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,46 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainConfiguration.cs" />
-    <Compile Include="Entities\Additional\PostEntity.cs" />
-    <Compile Include="Entities\Additional\UserEntity.cs" />
-    <Compile Include="Entities\CategoryEntity.cs" />
-    <Compile Include="Entities\CategoryMappingEntity.cs" />
-    <Compile Include="Entities\CommentEntity.cs" />
-    <Compile Include="Entities\ErrorEntity.cs" />
-    <Compile Include="Entities\PostEntity.cs" />
-    <Compile Include="Entities\RoleEntity.cs" />
-    <Compile Include="Entities\SettingEntity.cs" />
-    <Compile Include="Entities\TagEntity.cs" />
-    <Compile Include="Entities\TagMappingEntity.cs" />
-    <Compile Include="Entities\UserEntity.cs" />
-    <Compile Include="Entities\UserRoleEntity.cs" />
-    <Compile Include="Implements\CategoryService.cs" />
-    <Compile Include="Implements\CommentService.cs" />
-    <Compile Include="DisposableObject.cs" />
-    <Compile Include="Implements\ErrorService.cs" />
-    <Compile Include="Extension.cs" />
-    <Compile Include="Implements\PostService.cs" />
-    <Compile Include="Implements\RoleService.cs" />
-    <Compile Include="Implements\SettingService.cs" />
-    <Compile Include="Implements\TagService.cs" />
-    <Compile Include="Implements\UserService.cs" />
-    <Compile Include="Interfaces\ICacheService.cs" />
-    <Compile Include="Interfaces\ICategoryService.cs" />
-    <Compile Include="Interfaces\ICommentService.cs" />
-    <Compile Include="Interfaces\IErrorService.cs" />
-    <Compile Include="Interfaces\IPostService.cs" />
-    <Compile Include="Interfaces\IRoleService.cs" />
-    <Compile Include="Interfaces\ISettingService.cs" />
-    <Compile Include="Interfaces\ITagService.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\iBlog.Configuration\iBlog.Configuration.csproj">
-      <Project>{f5c386d3-eded-434d-b0be-67636f1429d8}</Project>
-      <Name>iBlog.Configuration</Name>
-    </ProjectReference>
+    <Compile Include="SettingConfigSection.cs" />
+    <Compile Include="ThemeElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

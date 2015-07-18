@@ -11,7 +11,7 @@ namespace iBlog.Domain
 {
     using System.Configuration;
 
-    using iBlog.Config;
+    using iBlog.Configuration;
 
     /// <summary>
     /// The domain configuration.

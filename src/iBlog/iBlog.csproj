@@ -162,9 +162,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\iBlog.Config\iBlog.Config.csproj">
-      <Project>{7a2f882c-d56d-4a09-bb31-60b3caa78494}</Project>
-      <Name>iBlog.Config</Name>
+    <ProjectReference Include="..\iBlog.Configuration\iBlog.Configuration.csproj">
+      <Project>{f5c386d3-eded-434d-b0be-67636f1429d8}</Project>
+      <Name>iBlog.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\iBlog.Domain\iBlog.Domain.csproj">
       <Project>{8650fa31-0a9a-4734-ad07-4e81bccf5d09}</Project>
