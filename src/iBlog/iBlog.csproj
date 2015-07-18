@@ -145,6 +145,46 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Bootstrap\css\bootstrap.css" />
+    <Content Include="Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Bootstrap\js\bootstrap.js" />
+    <Content Include="Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Bootstrap\js\npm.js" />
+    <Content Include="Bootswatch\Cerulean\bootstrap.css" />
+    <Content Include="Bootswatch\Cerulean\bootstrap.min.css" />
+    <Content Include="Bootswatch\Cosmo\bootstrap.css" />
+    <Content Include="Bootswatch\Cosmo\bootstrap.min.css" />
+    <Content Include="Bootswatch\Cyborg\bootstrap.css" />
+    <Content Include="Bootswatch\Cyborg\bootstrap.min.css" />
+    <Content Include="Bootswatch\Darkly\bootstrap.css" />
+    <Content Include="Bootswatch\Darkly\bootstrap.min.css" />
+    <Content Include="Bootswatch\Flatly\bootstrap.css" />
+    <Content Include="Bootswatch\Flatly\bootstrap.min.css" />
+    <Content Include="Bootswatch\Journal\bootstrap.css" />
+    <Content Include="Bootswatch\Journal\bootstrap.min.css" />
+    <Content Include="Bootswatch\Lumen\bootstrap.css" />
+    <Content Include="Bootswatch\Lumen\bootstrap.min.css" />
+    <Content Include="Bootswatch\Paper\bootstrap.css" />
+    <Content Include="Bootswatch\Paper\bootstrap.min.css" />
+    <Content Include="Bootswatch\Readable\bootstrap.css" />
+    <Content Include="Bootswatch\Readable\bootstrap.min.css" />
+    <Content Include="Bootswatch\Sandstone\bootstrap.css" />
+    <Content Include="Bootswatch\Sandstone\bootstrap.min.css" />
+    <Content Include="Bootswatch\Simplex\bootstrap.css" />
+    <Content Include="Bootswatch\Simplex\bootstrap.min.css" />
+    <Content Include="Bootswatch\Slate\bootstrap.css" />
+    <Content Include="Bootswatch\Slate\bootstrap.min.css" />
+    <Content Include="Bootswatch\Spacelab\bootstrap.css" />
+    <Content Include="Bootswatch\Spacelab\bootstrap.min.css" />
+    <Content Include="Bootswatch\Superhero\bootstrap.css" />
+    <Content Include="Bootswatch\Superhero\bootstrap.min.css" />
+    <Content Include="Bootswatch\United\bootstrap.css" />
+    <Content Include="Bootswatch\United\bootstrap.min.css" />
+    <Content Include="Bootswatch\Yeti\bootstrap.css" />
+    <Content Include="Bootswatch\Yeti\bootstrap.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -182,6 +222,110 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Cerulean\bootswatch.less" />
+    <Content Include="Bootswatch\Cerulean\variables.less" />
+    <Content Include="Bootswatch\Cerulean\_bootswatch.scss" />
+    <Content Include="Bootswatch\Cerulean\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Cosmo\bootswatch.less" />
+    <Content Include="Bootswatch\Cosmo\variables.less" />
+    <Content Include="Bootswatch\Cosmo\_bootswatch.scss" />
+    <Content Include="Bootswatch\Cosmo\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Cyborg\bootswatch.less" />
+    <Content Include="Bootswatch\Cyborg\variables.less" />
+    <Content Include="Bootswatch\Cyborg\_bootswatch.scss" />
+    <Content Include="Bootswatch\Cyborg\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Darkly\bootswatch.less" />
+    <Content Include="Bootswatch\Darkly\variables.less" />
+    <Content Include="Bootswatch\Darkly\_bootswatch.scss" />
+    <Content Include="Bootswatch\Darkly\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Flatly\bootswatch.less" />
+    <Content Include="Bootswatch\Flatly\variables.less" />
+    <Content Include="Bootswatch\Flatly\_bootswatch.scss" />
+    <Content Include="Bootswatch\Flatly\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Journal\bootswatch.less" />
+    <Content Include="Bootswatch\Journal\variables.less" />
+    <Content Include="Bootswatch\Journal\_bootswatch.scss" />
+    <Content Include="Bootswatch\Journal\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Lumen\bootswatch.less" />
+    <Content Include="Bootswatch\Lumen\variables.less" />
+    <Content Include="Bootswatch\Lumen\_bootswatch.scss" />
+    <Content Include="Bootswatch\Lumen\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Paper\bootswatch.less" />
+    <Content Include="Bootswatch\Paper\variables.less" />
+    <Content Include="Bootswatch\Paper\_bootswatch.scss" />
+    <Content Include="Bootswatch\Paper\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Readable\bootswatch.less" />
+    <Content Include="Bootswatch\Readable\variables.less" />
+    <Content Include="Bootswatch\Readable\_bootswatch.scss" />
+    <Content Include="Bootswatch\Readable\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Sandstone\bootswatch.less" />
+    <Content Include="Bootswatch\Sandstone\variables.less" />
+    <Content Include="Bootswatch\Sandstone\_bootswatch.scss" />
+    <Content Include="Bootswatch\Sandstone\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Simplex\bootswatch.less" />
+    <Content Include="Bootswatch\Simplex\variables.less" />
+    <Content Include="Bootswatch\Simplex\_bootswatch.scss" />
+    <Content Include="Bootswatch\Simplex\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Slate\bootswatch.less" />
+    <Content Include="Bootswatch\Slate\variables.less" />
+    <Content Include="Bootswatch\Slate\_bootswatch.scss" />
+    <Content Include="Bootswatch\Slate\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Spacelab\bootswatch.less" />
+    <Content Include="Bootswatch\Spacelab\variables.less" />
+    <Content Include="Bootswatch\Spacelab\_bootswatch.scss" />
+    <Content Include="Bootswatch\Spacelab\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Superhero\bootswatch.less" />
+    <Content Include="Bootswatch\Superhero\variables.less" />
+    <Content Include="Bootswatch\Superhero\_bootswatch.scss" />
+    <Content Include="Bootswatch\Superhero\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\United\bootswatch.less" />
+    <Content Include="Bootswatch\United\variables.less" />
+    <Content Include="Bootswatch\United\_bootswatch.scss" />
+    <Content Include="Bootswatch\United\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bootswatch\Yeti\bootswatch.less" />
+    <Content Include="Bootswatch\Yeti\variables.less" />
+    <Content Include="Bootswatch\Yeti\_bootswatch.scss" />
+    <Content Include="Bootswatch\Yeti\_variables.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
