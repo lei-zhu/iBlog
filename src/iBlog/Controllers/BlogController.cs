@@ -16,5 +16,9 @@ namespace iBlog.Controllers
     /// </summary>
     public class BlogController : Controller
     {
+        [HttpGet]
+        public void GetBlogTheme()
+        {
+        }
     }
 }

@@ -127,7 +127,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecentController.cs" />
-    <Compile Include="DependencyModule.cs" />
+    <Compile Include="Application\DependencyModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
