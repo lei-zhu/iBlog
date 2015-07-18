@@ -119,6 +119,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\App.cs" />
+    <Compile Include="Application\Extension.cs" />
+    <Compile Include="Application\HtmlHelperExtension.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -212,7 +214,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_Logo.cshtml" />
+    <Content Include="Views\Shared\Logo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
@@ -326,6 +328,9 @@
     <Content Include="Bootswatch\Yeti\variables.less" />
     <Content Include="Bootswatch\Yeti\_bootswatch.scss" />
     <Content Include="Bootswatch\Yeti\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Footer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

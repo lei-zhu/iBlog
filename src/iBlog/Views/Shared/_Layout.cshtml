@@ -1,4 +1,5 @@
-﻿@{
+﻿@using iBlog.Application
+@{
     Layout = null;
 }
 
@@ -7,11 +8,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>_Layout</title>
+    <title>@ViewBag.Title</title>
+    @Html.LoadThemeStyles(Html.Action("GetTheme", "Blog").ToString())
 </head>
 <body>
     <div>
-        
+        @RenderBody()
     </div>
 </body>
 </html>
