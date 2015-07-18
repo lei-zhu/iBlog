@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iBlog", "src\iBlog\iBlog.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iBlog.Domain", "src\iBlog.Domain\iBlog.Domain.csproj", "{8650FA31-0A9A-4734-AD07-4E81BCCF5D09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iBlog.Config", "src\iBlog.Config\iBlog.Config.csproj", "{7A2F882C-D56D-4A09-BB31-60B3CAA78494}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iBlog.Configuration", "src\iBlog.Configuration\iBlog.Configuration.csproj", "{F5C386D3-EDED-434D-B0BE-67636F1429D8}"
 EndProject
 Global
@@ -23,10 +21,6 @@ Global
 		{8650FA31-0A9A-4734-AD07-4E81BCCF5D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8650FA31-0A9A-4734-AD07-4E81BCCF5D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8650FA31-0A9A-4734-AD07-4E81BCCF5D09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A2F882C-D56D-4A09-BB31-60B3CAA78494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A2F882C-D56D-4A09-BB31-60B3CAA78494}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A2F882C-D56D-4A09-BB31-60B3CAA78494}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A2F882C-D56D-4A09-BB31-60B3CAA78494}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5C386D3-EDED-434D-B0BE-67636F1429D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5C386D3-EDED-434D-B0BE-67636F1429D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5C386D3-EDED-434D-B0BE-67636F1429D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
