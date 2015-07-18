@@ -10,13 +10,18 @@
 namespace iBlog.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
     using iBlog.Application;
     using iBlog.Configuration;
+    using iBlog.Domain.Entities;
     using iBlog.Domain.Interfaces;
     using iBlog.Models;
+    using iBlog.Service;
 
     /// <summary>
     ///     The blog controller.
@@ -26,10 +31,30 @@ namespace iBlog.Controllers
         #region Fields
 
         /// <summary>
+        /// The post cache unauth key.
+        /// </summary>
+        protected const string PostCacheUnauthKey = "GetAllPosts";
+
+        /// <summary>
+        /// The page cache unauth key.
+        /// </summary>
+        protected const string PageCacheUnauthKey = "GetAllPages";
+
+        /// <summary>
         /// The blog settings.
         /// </summary>
         private readonly SettingConfigSection blogSettings =
             ConfigurationManager.GetSection("iBlogSettings") as SettingConfigSection;
+
+        /// <summary>
+        /// The cache service.
+        /// </summary>
+        private readonly ICacheService cacheService;
+
+        /// <summary>
+        /// The post service.
+        /// </summary>
+        private readonly IPostService postService;
 
         /// <summary>
         /// The setting service.
@@ -37,17 +62,25 @@ namespace iBlog.Controllers
         private readonly ISettingService settingService;
 
         #endregion
-
+        
         #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
+        /// <param name="cache">
+        /// The cache.
+        /// </param>
+        /// <param name="post">
+        /// The post.
+        /// </param>
         /// <param name="setting">
         /// The setting.
         /// </param>
-        public BlogController(ISettingService setting)
+        public BlogController(ICacheService cache, IPostService post, ISettingService setting)
         {
+            this.cacheService = cache;
+            this.postService = post;
             this.settingService = setting;
         }
 
@@ -92,6 +125,47 @@ namespace iBlog.Controllers
         }
 
         /// <summary>
+        /// The index.
+        /// </summary>
+        /// <param name="pageUrl">
+        /// The page Url.
+        /// </param>
+        /// <param name="status">
+        /// The status.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        public ActionResult Index(string pageUrl, string status)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// The menu.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Menu()
+        {
+            var pages = this.GetPages();
+            pages = pages.Take(4).ToList();
+
+            var url = this.Request.Url;
+            if (url != null)
+            {
+                var pageName = GetPageName(url.ToString());
+                return this.PartialView(this.GetMenuViewModel(pages, pageName));
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// The logo.
         /// </summary>
         /// <returns>
@@ -110,6 +184,91 @@ namespace iBlog.Controllers
         #region Methods
 
         /// <summary>
+        /// The get page name.
+        /// </summary>
+        /// <param name="pageUrl">
+        /// The page url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private static string GetPageName(string pageUrl)
+        {
+            return Regex.Match(pageUrl, @"pages\/([^)]*)").Groups[1].Value;
+        }
+
+        /// <summary>
+        /// The markdown transform.
+        /// </summary>
+        /// <param name="posts">
+        /// The posts.
+        /// </param>
+        /// <param name="isMarkDown">
+        /// The is mark down.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List{PostEntity}"/>.
+        /// </returns>
+        private static List<PostEntity> MarkdownTransform(List<PostEntity> posts, bool isMarkDown)
+        {
+            var markdown = new MarkdownDeep.Markdown { ExtraMode = true };
+            if (isMarkDown)
+            {
+                posts.ForEach(p =>
+                {
+                    p.Content = markdown.Transform(p.Content);
+                });
+            }
+
+            return posts;
+        }
+
+        /// <summary>
+        /// The get menu view model.
+        /// </summary>
+        /// <param name="pages">
+        /// The pages.
+        /// </param>
+        /// <param name="requestedPageName">
+        /// The requested page name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MenuViewModel"/>.
+        /// </returns>
+        private MenuViewModel GetMenuViewModel(List<PostEntity> pages, string requestedPageName)
+        {
+            var viewModel = new MenuViewModel();
+
+            var menuItems = new List<MenuItem> { new MenuItem { Title = "home", Url = "/", Selected = false } };
+
+            pages.ForEach(p => menuItems.Add(new MenuItem { Title = p.Title, Url = p.Url, Selected = p.Url == requestedPageName }));
+
+            if (!menuItems.Any(p => p.Selected) && requestedPageName == string.Empty)
+            {
+                var home = menuItems.Single(p => p.Title == "home");
+                home.Selected = true;
+            }
+
+            viewModel.MenuItems = menuItems;
+            return viewModel;
+        }
+
+        /// <summary>
+        /// The get pages.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List{PostEntity}"/>.
+        /// </returns>
+        private List<PostEntity> GetPages()
+        {
+            var pages = Request.IsAuthenticated
+                            ? MarkdownTransform(this.postService.GetAllPages(this.GetUserId()), this.IsMarkDown())
+                            : this.cacheService.GetPagesFromCache(this.postService, PageCacheUnauthKey, this.IsMarkDown());
+            
+            return pages.OrderBy(p => p.Order != null ? p.Order.Value : 0).ToList();
+        }
+
+        /// <summary>
         /// The get root url.
         /// </summary>
         /// <returns>
@@ -124,6 +283,35 @@ namespace iBlog.Controllers
             }
 
             return "#";
+        }
+
+        /// <summary>
+        /// The get user id.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        private int GetUserId()
+        {
+            var userId = -1;
+            if (Request.IsAuthenticated)
+            {
+                var userInfo = (IUserInfo)User.Identity;
+                userId = int.Parse(userInfo.UserId);
+            }
+
+            return userId;
+        }
+
+        /// <summary>
+        /// The is mark down.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool IsMarkDown()
+        {
+            return this.settingService.EditorType.ToLower() == "markdown";
         }
 
         #endregion

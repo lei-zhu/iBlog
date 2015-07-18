@@ -6,14 +6,46 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Html.LoadThemeStyles(Html.Action("GetTheme", "Blog").ToString())
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Html.LoadThemeStyles(Html.Action("GetTheme", "Blog").ToString())
+        <script type="text/javascript" src="@Url.Content("~/JQuery/jquery-1.11.3.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Bootstrap/js/bootstrap.min.js")"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#iBlogNavbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.Action("Logo", "Blog")
+                </div>
+                <div class="navbar-collapse collapse" id="iBlogNavbar">
+                    @Html.Action("Menu", "Blog")
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    @RenderBody()
+                </div>
+                <div class="col-lg-3">
+                    @Html.Partial("SideBar")
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            @Html.Action("Footer", "Blog")
+        </div>
+    </body>
 </html>

@@ -1,0 +1,10 @@
+﻿@using iBlog.Application
+
+@model iBlog.Models.MenuViewModel
+
+<ul class="nav navbar-nav">
+    @foreach (var menuItem in Model.MenuItems)
+    {
+        @Html.CreateMenuItem(menuItem)
+    }
+</ul>

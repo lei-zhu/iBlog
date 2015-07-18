@@ -16,5 +16,18 @@ namespace iBlog.Controllers
     /// </summary>
     public class RecentController : Controller
     {
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult RecentPosts()
+        {
+            return null;
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Archives()
+        {
+            return null;
+        }
     }
 }

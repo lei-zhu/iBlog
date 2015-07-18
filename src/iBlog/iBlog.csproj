@@ -45,6 +45,9 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\..\packages\MarkdownDeep.NET.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -135,13 +138,16 @@
     </Compile>
     <Compile Include="Application\AppConfig.cs" />
     <Compile Include="Models\LogoViewModel.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CustomMembershipProvider.cs" />
     <Compile Include="Service\CustomMembershipService.cs" />
     <Compile Include="Service\CacheService.cs" />
     <Compile Include="Service\CustomRoleProvider.cs" />
     <Compile Include="Service\IMembershipService.cs" />
+    <Compile Include="Service\IUserInfo.cs" />
     <Compile Include="Service\ServiceLocator.cs" />
+    <Compile Include="Service\UserIdentity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -188,6 +194,8 @@
     <Content Include="Bootswatch\Yeti\bootstrap.css" />
     <Content Include="Bootswatch\Yeti\bootstrap.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="JQuery\jquery-1.11.3.js" />
+    <Content Include="JQuery\jquery-1.11.3.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -197,7 +205,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="JQuery\jquery-1.11.3.min.map" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -329,6 +339,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\SideBar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\SiteActions.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

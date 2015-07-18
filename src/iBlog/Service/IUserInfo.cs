@@ -1,35 +1,30 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogoViewModel.cs" company="iBlog">
+// <copyright file="IUserInfo.cs" company="iBlog">
 //   (C) 2015 iBlog. All rights reserved.
 // </copyright>
 // <summary>
-//   The logo view model.
+//   The UserInfo interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace iBlog.Models
+namespace iBlog.Service
 {
     /// <summary>
-    /// The logo view model.
+    /// The UserInfo interface.
     /// </summary>
-    public class LogoViewModel
+    public interface IUserInfo
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the blog name.
+        /// Gets the user id.
         /// </summary>
-        public string BlogName { get; set; }
+        string UserId { get; }
 
         /// <summary>
-        /// Gets or sets the blog title.
+        /// Gets the user token.
         /// </summary>
-        public string BlogTitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the root url.
-        /// </summary>
-        public string RootUrl { get; set; }
+        string UserToken { get; }
 
         #endregion
     }

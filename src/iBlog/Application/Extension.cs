@@ -17,7 +17,9 @@ namespace iBlog.Application
     using System.Web.Mvc;
 
     using iBlog.Configuration;
+    using iBlog.Domain.Entities;
     using iBlog.Domain.Interfaces;
+    using iBlog.Models;
 
     /// <summary>
     /// The extension.
@@ -34,6 +36,106 @@ namespace iBlog.Application
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>
+        /// The create menu item.
+        /// </summary>
+        /// <param name="helper">
+        /// The helper.
+        /// </param>
+        /// <param name="menuItem">
+        /// The menu item.
+        /// </param>
+        /// <returns>
+        /// The <see cref="MvcHtmlString"/>.
+        /// </returns>
+        public static MvcHtmlString CreateMenuItem(this HtmlHelper helper, MenuItem menuItem)
+        {
+            var builder = new StringBuilder();
+            var urlHelper = helper.GetUrlHelper();
+
+            var li = new TagBuilder("li");
+            if (menuItem.Selected)
+            {
+                li.AddCssClass("active");
+            }
+
+            var tag = new TagBuilder("a");
+
+            string value = menuItem.Url != "/"
+                               ? urlHelper.RouteUrl("Menu", new { pageUrl = menuItem.Url.ToLower(), status = string.Empty })
+                               : urlHelper.RouteUrl("Menu", new { pageUrl = "home", status = string.Empty });
+
+            tag.MergeAttribute("href", value);
+            tag.InnerHtml = menuItem.Title;
+
+            li.InnerHtml = tag.ToString();
+            builder.AppendLine(li.ToString());
+
+            return MvcHtmlString.Create(builder.ToString());
+        }
+
+        /// <summary>
+        /// The get pages from cache.
+        /// </summary>
+        /// <param name="cacheService">
+        /// The cache service.
+        /// </param>
+        /// <param name="postRepository">
+        /// The post repository.
+        /// </param>
+        /// <param name="cacheID">
+        /// The cache id.
+        /// </param>
+        /// <param name="isMarkdown">
+        /// The is markdown.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List{PostEntity}"/>.
+        /// </returns>
+        public static List<PostEntity> GetPagesFromCache(this ICacheService cacheService, IPostService postRepository, string cacheID, bool isMarkdown)
+        {
+            var markdown = new MarkdownDeep.Markdown { ExtraMode = true };
+
+            var pages = cacheService.Get(cacheID, postRepository.GetAllPages);
+            if (isMarkdown)
+            {
+                pages.ForEach(p => p.Content = markdown.Transform(p.Content));
+            }
+
+            return pages;
+        }
+
+        /// <summary>
+        /// The get posts from cache.
+        /// </summary>
+        /// <param name="cacheService">
+        /// The cache service.
+        /// </param>
+        /// <param name="postRepository">
+        /// The post repository.
+        /// </param>
+        /// <param name="cacheID">
+        /// The cache id.
+        /// </param>
+        /// <param name="isMarkdown">
+        /// The is markdown.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List{PostEntity}"/>.
+        /// </returns>
+        public static List<PostEntity> GetPostsFromCache(this ICacheService cacheService, IPostService postRepository, string cacheID, bool isMarkdown)
+        {
+            var markdown = new MarkdownDeep.Markdown { ExtraMode = true };
+
+            var posts = cacheService.Get(cacheID, postRepository.GetAllPosts);
+            if (isMarkdown)
+            {
+                posts.ForEach(p => p.Content = markdown.Transform(p.Content));
+            }
+
+            return posts;
+        }
 
         /// <summary>
         /// The find theme.
@@ -90,13 +192,15 @@ namespace iBlog.Application
                 file =>
                     {
                         var themeStyle = new TagBuilder("link");
-                        themeStyle.MergeAttribute(
-                            "href",
+
+                        string value =
                             urlHelper.Content(
                                 string.Format(
                                     "{0}/{1}",
                                     string.Format(ThemeBasePath, themeName),
-                                    Path.GetFileName(file))));
+                                    Path.GetFileName(file)));
+
+                        themeStyle.MergeAttribute("href", value);
                         themeStyle.MergeAttribute("rel", "stylesheet");
                         themeStyle.MergeAttribute("type", "text/css");
 

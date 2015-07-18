@@ -16,5 +16,11 @@ namespace iBlog.Controllers
     /// </summary>
     public class CategoryController : Controller
     {
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult Categories()
+        {
+            return null;
+        }
     }
 }

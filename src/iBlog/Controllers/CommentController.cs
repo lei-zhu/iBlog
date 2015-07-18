@@ -16,5 +16,11 @@ namespace iBlog.Controllers
     /// </summary>
     public class CommentController : Controller
     {
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult RecentComments()
+        {
+            return null;
+        }
     }
 }
