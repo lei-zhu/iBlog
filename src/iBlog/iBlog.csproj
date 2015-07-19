@@ -125,6 +125,8 @@
     <Compile Include="Application\Extension.cs" />
     <Compile Include="Application\HtmlHelperExtension.cs" />
     <Compile Include="Application\PostExtension.cs" />
+    <Compile Include="Collections\Archive.cs" />
+    <Compile Include="Collections\ArchiveCollection.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -361,6 +363,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\RecentComments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Archives.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Categories.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

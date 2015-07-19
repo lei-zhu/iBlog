@@ -1,0 +1,16 @@
+﻿@using iBlog.Collections
+@model ArchiveCollection
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            ARCHIVES
+        </h3>
+    </div>
+    <div class="list-group">
+        @foreach (Archive archive in Model)
+        {
+            <a class="list-group-item" href="\">@archive.MonthYear</a>
+        }
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model List<iBlog.Domain.Entities.CategoryEntity>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            CATEGORIES
+        </h3>
+    </div>
+    <div class="list-group">
+        @foreach (var category in Model)
+        {
+            <a class="list-group-item" href="\">@category.Name</a>
+        }
+    </div>
+</div>
