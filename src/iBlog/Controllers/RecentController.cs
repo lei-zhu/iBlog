@@ -9,25 +9,48 @@
 
 namespace iBlog.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
+
+    using iBlog.Domain.Entities;
 
     /// <summary>
     /// The recent controller.
     /// </summary>
-    public class RecentController : Controller
+    public class RecentController : HomeController
     {
-        [HttpGet]
-        [ChildActionOnly]
-        public ActionResult RecentPosts()
-        {
-            return null;
-        }
+        #region Public Methods and Operators
 
+        /// <summary>
+        /// The archives.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
         [HttpGet]
         [ChildActionOnly]
         public ActionResult Archives()
         {
             return null;
         }
+
+        /// <summary>
+        /// The recent posts.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult RecentPosts()
+        {
+            List<PostEntity> posts = this.GetPosts();
+            IEnumerable<PostEntity> model = posts.OrderByDescending(p => p.LastModifiedTime).Take(5);
+
+            return this.PartialView("RecentPosts", model);
+        }
+
+        #endregion
     }
 }

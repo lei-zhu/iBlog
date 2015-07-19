@@ -1,0 +1,17 @@
+﻿@model IEnumerable<iBlog.Domain.Entities.PostEntity>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            recent posts
+        </h3>
+    </div>
+    <div class="list-group">
+        @foreach (var post in Model)
+        {
+            var shortTitle = post.Title.Length > 25 ? string.Format("{0}...", post.Title.Substring(0, 25)) : post.Title;
+            
+            <a class="list-group-item" href="\" title="@post.Title">@shortTitle</a>
+        }
+    </div>
+</div>

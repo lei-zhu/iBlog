@@ -52,7 +52,7 @@ namespace iBlog.Application
         public static MvcHtmlString CreateMenuItem(this HtmlHelper helper, MenuItem menuItem)
         {
             var builder = new StringBuilder();
-            var urlHelper = helper.GetUrlHelper();
+            ////var urlHelper = helper.GetUrlHelper();
 
             var li = new TagBuilder("li");
             if (menuItem.Selected)
@@ -62,9 +62,7 @@ namespace iBlog.Application
 
             var tag = new TagBuilder("a");
 
-            string value = menuItem.Url != "/"
-                               ? urlHelper.RouteUrl("Menu", new { pageUrl = menuItem.Url.ToLower(), status = string.Empty })
-                               : urlHelper.RouteUrl("Menu", new { pageUrl = "home", status = string.Empty });
+            string value = menuItem.Url != "/" ? menuItem.Url.ToLower() : "/home/index";
 
             tag.MergeAttribute("href", value);
             tag.InnerHtml = menuItem.Title;

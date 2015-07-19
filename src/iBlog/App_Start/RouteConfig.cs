@@ -33,12 +33,6 @@ namespace iBlog.App_Start
                 "Default", 
                 "{controller}/{action}/{id}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });
-
-            routes.MapRoute(
-                "Menu",
-                "pages/{pageUrl}/{status}",
-                new { controller = "Blog", action = "Index", status = UrlParameter.Optional },
-                new { pageUrl = @"\S+", status = @"[a-z\-]*" });
         }
 
         #endregion

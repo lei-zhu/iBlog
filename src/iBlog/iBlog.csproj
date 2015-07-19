@@ -124,6 +124,7 @@
     <Compile Include="Application\App.cs" />
     <Compile Include="Application\Extension.cs" />
     <Compile Include="Application\HtmlHelperExtension.cs" />
+    <Compile Include="Application\PostExtension.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -137,8 +138,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Application\AppConfig.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\LogoViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
+    <Compile Include="Models\PagedViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CustomMembershipProvider.cs" />
     <Compile Include="Service\CustomMembershipService.cs" />
@@ -348,6 +352,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\SiteActions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Post.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\RecentPosts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\RecentComments.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

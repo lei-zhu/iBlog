@@ -1,6 +1,16 @@
-﻿@{
-    ViewBag.Title = "title";
+﻿@model iBlog.Models.PostViewModel
+
+@{
+    ViewBag.Title = string.Format("{0} || page {1}", Model.BlogName.ToLower(), Model.CurrentPageNumber);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>iBlog</h2>
+@if (!Model.Any)
+{
+    <div>there are no posts in the page entered.</div>
+}
+
+@foreach (var post in Model.PostItems)
+{
+    @Html.Partial("Post", post)
+}

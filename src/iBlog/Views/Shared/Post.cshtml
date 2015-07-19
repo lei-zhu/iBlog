@@ -1,0 +1,17 @@
+﻿@model iBlog.Models.PostItem
+
+<div class="well">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a href="@Model.Post.Url">@Model.Post.Title</a>
+            </h3>
+        </div>
+    </div>
+    <span class="post-details">
+        
+    </span>
+    <div class="entry">
+        <p>@Html.Raw(Model.Post.Content)</p>
+    </div>
+</div>

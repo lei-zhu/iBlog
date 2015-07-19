@@ -116,24 +116,6 @@ namespace iBlog.Controllers
         }
 
         /// <summary>
-        /// The index.
-        /// </summary>
-        /// <param name="pageUrl">
-        /// The page Url.
-        /// </param>
-        /// <param name="status">
-        /// The status.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        [HttpGet]
-        public ActionResult Index(string pageUrl, string status)
-        {
-            return null;
-        }
-
-        /// <summary>
         /// The menu.
         /// </summary>
         /// <returns>
@@ -173,6 +155,67 @@ namespace iBlog.Controllers
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// The get pages.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List{PostEntity}"/>.
+        /// </returns>
+        protected List<PostEntity> GetPages()
+        {
+            var pages = Request.IsAuthenticated
+                            ? MarkdownTransform(this.postService.GetAllPages(this.GetUserId()), this.IsMarkDown())
+                            : this.cacheService.GetPagesFromCache(this.postService, PageCacheUnauthKey, this.IsMarkDown());
+
+            return pages.OrderBy(p => p.Order != null ? p.Order.Value : 0).ToList();
+        }
+
+        /// <summary>
+        /// The get root url.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        protected string GetRootUrl()
+        {
+            Uri url = this.Request.Url;
+            if (url != null)
+            {
+                return string.Format("{0}://{1}{2}", url.Scheme, url.Authority, this.Url.Content("~"));
+            }
+
+            return "#";
+        }
+
+        /// <summary>
+        /// The get user id.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        protected int GetUserId()
+        {
+            var userId = -1;
+            if (Request.IsAuthenticated)
+            {
+                var userInfo = (IUserInfo)User.Identity;
+                userId = int.Parse(userInfo.UserId);
+            }
+
+            return userId;
+        }
+
+        /// <summary>
+        /// The is mark down.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool IsMarkDown()
+        {
+            return this.settingService.EditorType.ToLower() == "markdown";
+        }
 
         /// <summary>
         /// The get page name.
@@ -242,67 +285,6 @@ namespace iBlog.Controllers
 
             viewModel.MenuItems = menuItems;
             return viewModel;
-        }
-
-        /// <summary>
-        /// The get pages.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="List{PostEntity}"/>.
-        /// </returns>
-        private List<PostEntity> GetPages()
-        {
-            var pages = Request.IsAuthenticated
-                            ? MarkdownTransform(this.postService.GetAllPages(this.GetUserId()), this.IsMarkDown())
-                            : this.cacheService.GetPagesFromCache(this.postService, PageCacheUnauthKey, this.IsMarkDown());
-            
-            return pages.OrderBy(p => p.Order != null ? p.Order.Value : 0).ToList();
-        }
-
-        /// <summary>
-        /// The get root url.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetRootUrl()
-        {
-            Uri url = this.Request.Url;
-            if (url != null)
-            {
-                return string.Format("{0}://{1}{2}", url.Scheme, url.Authority, this.Url.Content("~"));
-            }
-
-            return "#";
-        }
-
-        /// <summary>
-        /// The get user id.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        private int GetUserId()
-        {
-            var userId = -1;
-            if (Request.IsAuthenticated)
-            {
-                var userInfo = (IUserInfo)User.Identity;
-                userId = int.Parse(userInfo.UserId);
-            }
-
-            return userId;
-        }
-
-        /// <summary>
-        /// The is mark down.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool IsMarkDown()
-        {
-            return this.settingService.EditorType.ToLower() == "markdown";
         }
 
         #endregion
