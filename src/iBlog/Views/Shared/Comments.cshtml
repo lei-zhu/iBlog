@@ -1,0 +1,20 @@
+﻿@using System.Globalization
+@model iBlog.Domain.Entities.PostEntity
+
+<h3 style="color: #317eac;">Comments</h3>
+@foreach (var comment in Model.Comments)
+{
+    <blockquote style="background-color: whitesmoke;">
+        <p>@comment.Content</p>
+        <small>
+            PostedBy&nbsp;&nbsp;
+            <strong style="color: #317eac;">
+                @comment.CommenterName
+            </strong>
+            &nbsp;&nbsp;at&nbsp;&nbsp;
+            <strong>
+                @comment.PostedTime.ToString("yyyy/MM/dd HH:mm:ss")
+            </strong>
+        </small>
+    </blockquote>
+}

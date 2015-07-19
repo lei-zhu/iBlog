@@ -1,0 +1,17 @@
+﻿@model iBlog.Models.PostPageViewModel
+
+<div>
+    @if (Model.PreviousPost != null)
+    {
+        <div style="float: left">
+            @Html.RouteLink("<< Previous Post", "Post", new { year = Model.PreviousPost.PostYear, month = Model.PreviousPost.PostMonth, url = Model.PreviousPost.Url, status = string.Empty }, new { @title = Model.PreviousPost.Title })
+        </div>
+    }
+
+    @if (Model.NextPost != null)
+    {
+        <div style="float: right">
+            @Html.RouteLink("Next Post >>", "Post", new { year = Model.NextPost.PostYear, month = Model.NextPost.PostMonth, url = Model.NextPost.Url }, new { @title = Model.NextPost.Title })
+        </div>
+    }
+</div>

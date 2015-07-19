@@ -31,11 +31,6 @@ namespace iBlog.Models
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or sets the is human.
-        /// </summary>
-        public string IsHuman { get; set; }
-
-        /// <summary>
         /// Gets or sets the post.
         /// </summary>
         public PostEntity Post { get; set; }

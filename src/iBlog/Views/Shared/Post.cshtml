@@ -4,13 +4,13 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">
-                <a href="@Model.Post.Url">@Model.Post.Title</a>
+                @{
+                    var url = Url.RouteUrl("Post", new { year = Model.Post.PostYear, month = Model.Post.PostMonth, url = Model.Post.Url, status = string.Empty });
+                }
+                <a href="@url">@Model.Post.Title</a>
             </h3>
         </div>
     </div>
-    <span class="post-details">
-        
-    </span>
     <div>
         <p>@Html.Raw(Model.Post.Content)</p>
         <div class="row post-details">

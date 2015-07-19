@@ -10,11 +10,13 @@
 namespace iBlog.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using iBlog.Application;
     using iBlog.Domain.Entities;
     using iBlog.Domain.Interfaces;
+    using iBlog.Exceptions;
     using iBlog.Models;
     using iBlog.Service;
 
@@ -42,6 +44,11 @@ namespace iBlog.Controllers
         /// </summary>
         private readonly ISettingService settingService;
 
+        /// <summary>
+        /// The user service.
+        /// </summary>
+        private readonly IUserService userService;
+
         #endregion
 
         #region Constructors and Destructors
@@ -54,6 +61,7 @@ namespace iBlog.Controllers
             this.cacheService = ServiceLocator.Instance.GetService<ICacheService>();
             this.settingService = ServiceLocator.Instance.GetService<ISettingService>();
             this.postService = ServiceLocator.Instance.GetService<IPostService>();
+            this.userService = ServiceLocator.Instance.GetService<IUserService>();
         }
 
         #endregion
@@ -69,11 +77,61 @@ namespace iBlog.Controllers
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
+        [HttpGet]
         public ActionResult Index(int? page)
         {
             List<PostEntity> posts = this.GetPosts();
             PostViewModel viewModel = posts.GetPostViewModel(page, this.settingService, this.GetRootUrl());
             return this.View(viewModel);
+        }
+
+        /// <summary>
+        /// The post page.
+        /// </summary>
+        /// <param name="year">
+        /// The year.
+        /// </param>
+        /// <param name="month">
+        /// The month.
+        /// </param>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <param name="status">
+        /// The status.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        public ActionResult PostPage(string year, string month, string url, string status)
+        {
+            var allPosts = this.GetPosts();
+            var current = allPosts.SingleOrDefault(p => p.Url == url && p.EntryType == 1);
+            if (current == null)
+            {
+                throw new UrlNotFoundException("Unable to find a post w/ the url {0} for the month {1} and year {2}", url, month, year);
+            }
+
+            if (!Request.IsAuthenticated && status == "comment-posted")
+            {
+                var recentPost = this.postService.GetPostByUrl(url, 1);
+                current.Comments = recentPost.Comments;
+            }
+
+            var index = allPosts.IndexOf(current);
+            var model = new PostPageViewModel
+            {
+                Post = current,
+                PreviousPost = index == 0 || index < 0 ? null : allPosts[index - 1],
+                NextPost = index == (allPosts.Count - 1) || index < 0 ? null : allPosts[index + 1],
+                UserCanEdit = Request.IsAuthenticated && (current.UserID == GetUserId() || User.IsInRole("SuperAdmin")),
+                BlogName = this.settingService.BlogName,
+                BlogCaption = this.settingService.BlogCaption,
+                CommentEntity = this.GetCommentEntity()
+            };
+
+            return this.View(model);
         }
 
         #endregion
@@ -129,6 +187,29 @@ namespace iBlog.Controllers
                     });
 
             return postList;
+        }
+
+        /// <summary>
+        /// The get comment entity.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="CommentEntity"/>.
+        /// </returns>
+        private CommentEntity GetCommentEntity()
+        {
+            var userId = GetUserId();
+            if (userId == -1)
+            {
+                return new CommentEntity();
+            }
+
+            var user = this.userService.GetUserByUserID(userId);
+            return new CommentEntity
+            {
+                CommenterName = user.DisplayName,
+                CommenterEmail = user.EmailAddress,
+                CommenterSite = user.UserSite
+            };
         }
 
         #endregion

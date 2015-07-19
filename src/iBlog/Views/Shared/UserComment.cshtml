@@ -1,0 +1,52 @@
+﻿@model iBlog.Models.CommentViewModel
+
+@using (Html.BeginForm("Add", "Comment", FormMethod.Post, new { id = "userComment", @class="form-horizontal" }))
+{
+    <fieldset>
+        <legend>Post your comment</legend>
+        <div class="form-group">
+            @Html.LabelFor(c => c.Comment.CommenterName, "User Name", new { @class = "col-lg-2 control-label" })
+            @*<label for="userName" class="col-lg-2 control-label">User Name</label>*@
+            <div class="col-lg-6">
+                @Html.TextBoxFor(c => c.Comment.CommenterName, new { @class = "form-control", placeholder = "please input your real name" })
+                @*<input type="text" class="form-control" id="userName" placeholder="please input your real name">*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.Comment.CommenterEmail, "Email Address", new { @class = "col-lg-2 control-label" })
+            @*<label for="emailAddress" class="col-lg-2 control-label">Email Address</label>*@
+            <div class="col-lg-6">
+                @Html.TextBoxFor(c => c.Comment.CommenterEmail, new { @class = "form-control", placeholder = "please input your email address" })
+                @*<input type="text" class="form-control" id="emailAddress" placeholder="please input your email address">*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.Comment.CommenterSite, "Site Address", new { @class = "col-lg-2 control-label" })
+            @*<label for="siteAddress" class="col-lg-2 control-label">Site Address</label>*@
+            <div class="col-lg-6">
+                @Html.TextBoxFor(c => c.Comment.CommenterSite, new { @class = "form-control", placeholder = "please input your web site address" })
+                @*<input type="text" class="form-control" id="siteAddress" placeholder="please input your web site address">*@
+            </div>
+        </div>
+        <div class="form-group">
+            @*<label for="content" class="col-lg-2 control-label">Content</label>*@
+            @Html.LabelFor(c => c.Comment.Content, "Content", new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-6">
+                @Html.TextAreaFor(c => c.Comment.Content, 3, 30, new { @class = "form-control", placeholder = "please input your comment" })
+                @*<textarea class="form-control" rows="3" id="content" placeholder="please input your comment"></textarea>*@
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Post.ID)
+        @Html.HiddenFor(model => model.Post.Title)
+        @Html.HiddenFor(model => model.Post.Url)
+        @Html.HiddenFor(model => model.Post.EntryType)
+        @Html.HiddenFor(model => model.Post.CreateTime)
+
+        <div class="form-group">
+            <div class="col-lg-8" style="text-align: right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+}

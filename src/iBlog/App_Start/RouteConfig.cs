@@ -36,6 +36,12 @@ namespace iBlog.App_Start
                 new { page = @"\d+" });
 
             routes.MapRoute(
+                "Post",
+                "{year}/{month}/{url}/{status}",
+                new { controller = "Home", action = "PostPage", status = UrlParameter.Optional },
+                new { year = @"\d{4}", month = @"[0-9]{1,2}", url = @"\S+", status = @"[a-z\-]*" });
+
+            routes.MapRoute(
                 "Default", 
                 "{controller}/{action}/{id}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });

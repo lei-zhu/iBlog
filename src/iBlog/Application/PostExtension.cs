@@ -132,7 +132,7 @@ namespace iBlog.Application
         /// The total pages.
         /// </param>
         /// <returns>
-        /// The <see cref="PostViewModel"/>.
+        /// The <see cref="PostPageViewModel"/>.
         /// </returns>
         private static PostViewModel GetPostViewModel(int currentPage, int totalPages)
         {
