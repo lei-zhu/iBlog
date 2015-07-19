@@ -11,7 +11,20 @@
     <span class="post-details">
         
     </span>
-    <div class="entry">
+    <div>
         <p>@Html.Raw(Model.Post.Content)</p>
+        <div class="row post-details">
+            <div class="col-lg-3">
+                @Html.Partial("Tags", Model.Post.Tags)
+            </div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3" style="text-align: right;">
+                @{
+                    var count = Model.Post.Comments != null ? Model.Post.Comments.Count : 0;
+                    @count <a href="@("/" + "#user-comments")">Comments</a>
+                }
+            </div>
+        </div>
     </div>
 </div>
