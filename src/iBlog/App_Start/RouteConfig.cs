@@ -30,6 +30,12 @@ namespace iBlog.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "Page",
+                "home/index/{page}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new { page = @"\d+" });
+
+            routes.MapRoute(
                 "Default", 
                 "{controller}/{action}/{id}", 
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });

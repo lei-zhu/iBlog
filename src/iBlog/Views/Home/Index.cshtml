@@ -7,10 +7,34 @@
 
 @if (!Model.Any)
 {
-    <div>there are no posts in the page entered.</div>
+    <div class="alert alert-dismissible alert-warning">
+        <h4>There's nothing.</h4>
+        <p>There are no posts in the page entered.</p>
+    </div>
 }
 
 @foreach (var post in Model.PostItems)
 {
     @Html.Partial("Post", post)
 }
+
+<div>
+    @if (Model.Any && Model.PreviousPageValid)
+    {
+        <div style="float: right">
+            @Html.RouteLink("Next Page >>", "Page", new { page = Model.PreviousPageNumber })
+        </div>
+    }
+
+    @if (Model.Any && Model.NextPageValid)
+    {
+        <div style="float: left">
+            @Html.RouteLink("<< Previous Page", "Page", new { page = Model.NextPageNumber })
+        </div>
+    }
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>

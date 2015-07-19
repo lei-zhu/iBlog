@@ -52,7 +52,6 @@ namespace iBlog.Application
         public static MvcHtmlString CreateMenuItem(this HtmlHelper helper, MenuItem menuItem)
         {
             var builder = new StringBuilder();
-            ////var urlHelper = helper.GetUrlHelper();
 
             var li = new TagBuilder("li");
             if (menuItem.Selected)

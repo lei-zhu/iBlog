@@ -273,7 +273,7 @@ namespace iBlog.Controllers
         {
             var viewModel = new MenuViewModel();
 
-            var menuItems = new List<MenuItem> { new MenuItem { Title = "home", Url = "/", Selected = false } };
+            var menuItems = new List<MenuItem> { new MenuItem { Title = "home", Url = "/home/index", Selected = false } };
 
             pages.ForEach(p => menuItems.Add(new MenuItem { Title = p.Title, Url = p.Url, Selected = p.Url == requestedPageName }));
 
