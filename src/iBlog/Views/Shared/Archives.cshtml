@@ -10,7 +10,8 @@
     <div class="list-group">
         @foreach (Archive archive in Model)
         {
-            <a class="list-group-item" href="\">@archive.MonthYear</a>
+            var url = Url.RouteUrl("PageByYearMonth", new { year = archive.Year, month = archive.Month });
+            <a class="list-group-item" href="@url">@archive.MonthYear</a>
         }
     </div>
 </div>

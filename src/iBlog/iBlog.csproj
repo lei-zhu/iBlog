@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecentController.cs" />
     <Compile Include="Application\DependencyModule.cs" />
+    <Compile Include="Exceptions\InvalidMonthException.cs" />
     <Compile Include="Exceptions\UrlNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -386,6 +387,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Comments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\IndexByYearMonth.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,10 +8,11 @@
 
 @Html.Partial("Post", new PostItem { Post = Model.Post, RootUrl = string.Empty })
 @Html.Partial("Comments", Model.Post)
+@Html.Partial("PostPager", Model)
+
+<br /><br />
 @if (Model.Post.CanAddComments)
 {
     @Html.Partial("UserComment", new CommentViewModel { Post = Model.Post, Comment = Model.CommentEntity })
 }
-
 <br />
-@Html.Partial("PostPager", Model)

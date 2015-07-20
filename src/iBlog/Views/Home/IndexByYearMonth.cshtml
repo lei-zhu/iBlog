@@ -1,0 +1,41 @@
+﻿@using iBlog.Application
+@model iBlog.Models.PostViewModel
+
+@{
+    ViewBag.Title = string.Format("{0} {1} || {2} || page {3}", Model.Month.GetMonthName(), Model.Year, Model.BlogName.ToLower(), Model.CurrentPageNumber);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Any)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <h4>There's nothing.</h4>
+        <p>There are no posts for this year & month.</p>
+    </div>
+}
+
+@foreach (var post in Model.PostItems)
+{
+    @Html.Partial("Post", post)
+}
+
+<div>
+    @if (Model.Any && Model.PreviousPageValid)
+    {
+        <div style="float: right">
+            @Html.RouteLink("Next Page >>", "PageByYearMonth", new { year = Model.Year, month = Model.Month, page = Model.PreviousPageNumber })
+        </div>
+    }
+
+    @if (Model.Any && Model.NextPageValid)
+    {
+        <div style="float: left">
+            @Html.RouteLink("<< Previous Page", "PageByYearMonth", new { year = Model.Year, month = Model.Month, page = Model.NextPageNumber })
+        </div>
+    }
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>

@@ -10,6 +10,7 @@
 namespace iBlog.Application
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -19,6 +20,7 @@ namespace iBlog.Application
     using iBlog.Configuration;
     using iBlog.Domain.Entities;
     using iBlog.Domain.Interfaces;
+    using iBlog.Exceptions;
     using iBlog.Models;
 
     /// <summary>
@@ -70,6 +72,27 @@ namespace iBlog.Application
             builder.AppendLine(li.ToString());
 
             return MvcHtmlString.Create(builder.ToString());
+        }
+
+        /// <summary>
+        /// The get month name.
+        /// </summary>
+        /// <param name="monthCode">
+        /// The month code.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string GetMonthName(this string monthCode)
+        {
+            int monthNumber;
+            if (!int.TryParse(monthCode, out monthNumber) || monthNumber < 1 || monthNumber > 12)
+            {
+                throw new InvalidMonthException("An invalid month number was passed", monthCode);
+            }
+
+            var formatInfo = new DateTimeFormatInfo();
+            return formatInfo.GetMonthName(monthNumber).ToLower();
         }
 
         /// <summary>

@@ -69,6 +69,35 @@ namespace iBlog.Controllers
         #region Public Methods and Operators
 
         /// <summary>
+        /// The archives.
+        /// </summary>
+        /// <param name="year">
+        /// The year.
+        /// </param>
+        /// <param name="month">
+        /// The month.
+        /// </param>
+        /// <param name="page">
+        /// The page.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        public ActionResult Archives(string year, string month, int? page)
+        {
+            var posts =
+                this.GetPosts()
+                    .Where(p => p.CreateTime.Month == int.Parse(month) && p.CreateTime.Year == int.Parse(year))
+                    .ToList();
+
+            var viewModel = posts.GetPostViewModel(page, this.settingService, GetRootUrl());
+            viewModel.Year = year;
+            viewModel.Month = month;
+
+            return this.View("IndexByYearMonth", viewModel);
+        }
+
+        /// <summary>
         /// The index.
         /// </summary>
         /// <param name="page">
@@ -113,7 +142,7 @@ namespace iBlog.Controllers
                 throw new UrlNotFoundException("Unable to find a post w/ the url {0} for the month {1} and year {2}", url, month, year);
             }
 
-            if (!Request.IsAuthenticated && status == "comment-posted")
+            if (!Request.IsAuthenticated && status == "comment-successed")
             {
                 var recentPost = this.postService.GetPostByUrl(url, 1);
                 current.Comments = recentPost.Comments;

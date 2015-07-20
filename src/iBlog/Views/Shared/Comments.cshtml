@@ -1,7 +1,16 @@
-﻿@using System.Globalization
-@model iBlog.Domain.Entities.PostEntity
+﻿@model iBlog.Domain.Entities.PostEntity
 
-<h3 style="color: #317eac;">Comments</h3>
+<script type="text/javascript">
+    $(function () {
+        var url = document.location.href;
+        if (url.indexOf('comment-successed') >= 0) {
+            var commentsTop = $('#user-comments').offset().top;
+            $("html, body").animate({ scrollTop: commentsTop }, 1000);
+        }
+    });
+</script>
+
+<h4 style="color: #317eac;" id="user-comments">Post Comments</h4>
 @foreach (var comment in Model.Comments)
 {
     <blockquote style="background-color: whitesmoke;">
