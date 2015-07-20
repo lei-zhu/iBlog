@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-3"></div>
             <div class="col-lg-3"></div>
-            <div class="col-lg-3" style="text-align: right;">
+            <div class="col-lg-3" id="user-comments" style="text-align: right;">
                 @{
                     var count = Model.Post.Comments != null ? Model.Post.Comments.Count : 0;
                     @count <a href="@(url + "#user-comments")">Comments</a>
