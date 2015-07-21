@@ -169,7 +169,7 @@
     <Content Include="Bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Bootstrap\js\bootstrap.js" />
     <Content Include="Bootstrap\js\bootstrap.min.js" />
-    <Content Include="Bootstrap\js\npm.js" />
+    <Content Include="Bootstrap\js\validator.js" />
     <Content Include="Bootswatch\Cerulean\bootstrap.css" />
     <Content Include="Bootswatch\Cerulean\bootstrap.min.css" />
     <Content Include="Bootswatch\Cosmo\bootstrap.css" />
