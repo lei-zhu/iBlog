@@ -38,8 +38,14 @@ namespace iBlog.App_Start
             routes.MapRoute(
                 "PageByYearMonth",
                 "{year}/{month}",
-                new { controller = "Home", action = "Archives" },
+                new { controller = "Home", action = "IndexByYearMonth" },
                 new { year = @"\d{4}", month = @"[0-9]{1,2}" });
+
+            routes.MapRoute(
+                "PageByCategory",
+                "category/{categoryName}",
+                new { controller = "Home", action = "IndexByCategory" },
+                new { categoryName = @"\S+" });
 
             routes.MapRoute(
                 "Post",

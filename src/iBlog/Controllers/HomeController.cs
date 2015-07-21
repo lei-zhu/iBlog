@@ -34,6 +34,8 @@ namespace iBlog.Controllers
         /// </summary>
         private readonly ICacheService cacheService;
 
+        private readonly ICategoryService categoryService;
+
         /// <summary>
         /// The post service.
         /// </summary>
@@ -59,6 +61,7 @@ namespace iBlog.Controllers
         public HomeController()
         {
             this.cacheService = ServiceLocator.Instance.GetService<ICacheService>();
+            this.categoryService = ServiceLocator.Instance.GetService<ICategoryService>();
             this.settingService = ServiceLocator.Instance.GetService<ISettingService>();
             this.postService = ServiceLocator.Instance.GetService<IPostService>();
             this.userService = ServiceLocator.Instance.GetService<IUserService>();
@@ -69,7 +72,7 @@ namespace iBlog.Controllers
         #region Public Methods and Operators
 
         /// <summary>
-        /// The archives.
+        /// The index by year month.
         /// </summary>
         /// <param name="year">
         /// The year.
@@ -83,7 +86,8 @@ namespace iBlog.Controllers
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        public ActionResult Archives(string year, string month, int? page)
+        [HttpGet]
+        public ActionResult IndexByYearMonth(string year, string month, int? page)
         {
             var posts =
                 this.GetPosts()
@@ -95,6 +99,29 @@ namespace iBlog.Controllers
             viewModel.Month = month;
 
             return this.View("IndexByYearMonth", viewModel);
+        }
+
+        /// <summary>
+        /// The index by category.
+        /// </summary>
+        /// <param name="categoryName">
+        /// The category name.
+        /// </param>
+        /// <param name="page">
+        /// The page.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        public ActionResult IndexByCategory(string categoryName, int? page)
+        {
+            var posts = this.GetPosts().Where(p => p.Categories.Any(c => c.Slug == categoryName.ToLower())).ToList();
+            
+            var viewModel = posts.GetPostViewModel(page, this.settingService, GetRootUrl());
+            viewModel.Category = this.GetCategoryEntity(categoryName);
+
+            return this.View("IndexByCategory", viewModel);
         }
 
         /// <summary>
@@ -216,6 +243,24 @@ namespace iBlog.Controllers
                     });
 
             return postList;
+        }
+
+        /// <summary>
+        /// The get category entity.
+        /// </summary>
+        /// <param name="categoryName">
+        /// The category name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="CategoryEntity"/>.
+        /// </returns>
+        private CategoryEntity GetCategoryEntity(string categoryName)
+        {
+            var categoryEntity =
+                this.categoryService.GetAllCategories().SingleOrDefault(c => c.Slug == categoryName.ToLower())
+                ?? new CategoryEntity { Name = categoryName };
+
+            return categoryEntity;
         }
 
         /// <summary>

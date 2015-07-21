@@ -9,7 +9,8 @@
     <div class="list-group">
         @foreach (var category in Model)
         {
-            <a class="list-group-item" href="\">@category.Name</a>
+            var url = Url.RouteUrl("PageByCategory", new { categoryName = category.Slug });
+            <a class="list-group-item" href="@url">@category.Name</a>
         }
     </div>
 </div>

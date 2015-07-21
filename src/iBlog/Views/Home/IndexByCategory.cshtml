@@ -1,0 +1,40 @@
+﻿@model iBlog.Models.PostViewModel
+
+@{
+    ViewBag.Title = string.Format("{0} || {1} || page {2}", Model.Category.Name, Model.BlogName.ToLower(), Model.CurrentPageNumber);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Any)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <h4>There's nothing.</h4>
+        <p>There are no posts for the selected category.</p>
+    </div>
+}
+
+@foreach (var post in Model.PostItems)
+{
+    @Html.Partial("Post", post)
+}
+
+<div>
+    @if (Model.Any && Model.PreviousPageValid)
+    {
+        <div style="float: right">
+            @Html.RouteLink("Next Page >>", "PageByCategory", new { categoryName = Model.Category.Slug, page = Model.PreviousPageNumber })
+        </div>
+    }
+
+    @if (Model.Any && Model.NextPageValid)
+    {
+        <div style="float: left">
+            @Html.RouteLink("<< Previous Page", "PageByCategory", new { categoryName = Model.Category.Slug, page = Model.NextPageNumber })
+        </div>
+    }
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
