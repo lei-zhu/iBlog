@@ -12,7 +12,7 @@
             var url = Url.RouteUrl("Post", new { year = post.PostYear, month = post.PostMonth, url = post.Url, status = string.Empty });
             var shortTitle = post.Title.Length > 25 ? string.Format("{0}...", post.Title.Substring(0, 25)) : post.Title;
             
-            <a class="list-group-item" href="@url" title="@post.Title">@shortTitle</a>
+            <a class="list-group-item" href="@url" style="font-family: 微软雅黑;" title="@post.Title">@shortTitle</a>
         }
     </div>
 </div>

@@ -44,8 +44,7 @@ namespace iBlog.App_Start
             routes.MapRoute(
                 "PageByCategory",
                 "category/{categoryName}",
-                new { controller = "Home", action = "IndexByCategory" },
-                new { categoryName = @"\S+" });
+                new { controller = "Home", action = "IndexByCategory" });
 
             routes.MapRoute(
                 "Post",

@@ -10,7 +10,7 @@
         @foreach (var comment in Model)
         {
             var url = comment.EntryType == 1 ? Url.RouteUrl("Post", new { year = comment.PostedTime.Year, month = comment.PostedTime.Month.ToString("00"), url = comment.PostUrl, status = string.Empty }) : Url.RouteUrl("Default", new { pageUrl = comment.PostUrl });
-            <a class="list-group-item" href="@(url + "#user-comments")">@comment.Content</a>
+            <a class="list-group-item" style="font-family: 微软雅黑;" href="@(url + "#user-comments")">@comment.Content</a>
         }
     </div>
 </div>
