@@ -26,11 +26,6 @@ namespace iBlog.Models
         public CommentEntity Comment { get; set; }
 
         /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or sets the post.
         /// </summary>
         public PostEntity Post { get; set; }

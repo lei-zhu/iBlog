@@ -14,8 +14,6 @@ namespace iBlog
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Autofac.Integration.Mvc;
-
     using iBlog.App_Start;
     using iBlog.Application;
 

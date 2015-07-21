@@ -68,23 +68,21 @@ namespace iBlog.Controllers
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
+        [HttpPost]
         public ActionResult Add(CommentViewModel viewModel)
         {
             var commentStatus = false;
 
             if (ModelState.IsValid)
             {
-                if (viewModel.DisplayName == null || Request.IsAuthenticated)
+                viewModel.Comment.PostID = viewModel.Post.ID;
+                if (Request.IsAuthenticated)
                 {
-                    viewModel.Comment.PostID = viewModel.Post.ID;
-                    if (Request.IsAuthenticated)
-                    {
-                        viewModel.Comment.UserID = this.GetUserId();
-                    }
-
-                    this.commentService.AddComment(viewModel.Comment);
-                    commentStatus = true;
+                    viewModel.Comment.UserID = this.GetUserId();
                 }
+
+                this.commentService.AddComment(viewModel.Comment);
+                commentStatus = true;
             }
 
             return this.RedirectToPostPage(viewModel, commentStatus);
